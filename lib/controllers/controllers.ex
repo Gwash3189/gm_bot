@@ -2,7 +2,7 @@ defmodule GmBot.Controllers do
   import GmBot.Router
 
   route action: "register", controller: RegisterController
-  route action: "set", controller: SetController
+  # route action: "set", controller: SetController
   route action: "hi", controller: PingController
   route action: "hello", controller: PingController
   route action: "help", controller: HelpController
