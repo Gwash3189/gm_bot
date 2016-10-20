@@ -17,7 +17,7 @@ defmodule GmBot.Controllers.RegisterController do
     """
     - `register <character name>` Registers a character so you can track stats and hp
       Example: ```
-        <user> register Drake Daverell III
+        <user> @gm_bot register Drake Daverell III
         <gm_bot> Drake Daverell III has been registerd
       ```
     """

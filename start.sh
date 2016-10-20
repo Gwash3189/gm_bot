@@ -1,4 +1,5 @@
 #!/bin/bash
+git pull
 npm install -g github-webhook
 mix ecto.create && mix ecto.migrate
 echo "running webhook server"

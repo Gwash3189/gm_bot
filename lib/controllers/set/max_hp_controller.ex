@@ -28,5 +28,11 @@ defmodule GmBot.Controllers.Set.MaxHpController do
     """)
   end
 
-  def help, do: ""
+  def help, do: """
+  - `set <character name> max hp to 30` Sets a characters max hp to the provided value
+    Example: ```
+      <user> @gm_bot set Drake Daverell III max hp to 54
+      <gm_bot> Drake Daverell III's max hp has been set to 54
+    ```
+  """
 end
