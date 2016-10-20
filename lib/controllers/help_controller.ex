@@ -7,6 +7,8 @@ defmodule GmBot.Controllers.HelpController do
 
     *Commands*
     #{GmBot.Controllers.RegisterController.help}
+    #{GmBot.Controllers.Set.MaxHpController.help}
+    #{GmBot.Controllers.What.MaxHpController.help}
     """
   end
 
