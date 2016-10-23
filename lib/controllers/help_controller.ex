@@ -9,6 +9,8 @@ defmodule GmBot.Controllers.HelpController do
     #{GmBot.Controllers.RegisterController.help}
     #{GmBot.Controllers.Set.MaxHpController.help}
     #{GmBot.Controllers.What.MaxHpController.help}
+    #{GmBot.Controllers.Set.CurrentHpController.help}
+    #{GmBot.Controllers.What.CurrentHpController.help}
     """
   end
 

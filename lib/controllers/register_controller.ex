@@ -2,10 +2,10 @@ defmodule GmBot.Controllers.RegisterController do
   @behaviour GmBot.Controllers
   alias GmBot.Models.Character
 
-  def handle(%{parts: parts, user: user}) do
+  def handle(%{parts: parts, user: owner}) do
     name = Enum.join(parts, " ")
-    character = %Character{name: name, owner: user}
-    changeset = Character.changeset(character)
+    changeset = %Character{name: name, owner: owner}
+      |> Character.changeset
 
     case GmBot.Repo.insert(changeset) do
       {:ok, character} -> success(character.name)

@@ -4,7 +4,7 @@ use Mix.Config
 
 config :gm_bot, ecto_repos: [GmBot.Repo]
 
-import_config "config.secret.exs"
+import_config "config.#{Mix.env}.secret.exs"
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this

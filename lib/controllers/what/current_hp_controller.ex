@@ -1,4 +1,4 @@
-defmodule GmBot.Controllers.What.MaxHpController do
+defmodule GmBot.Controllers.What.CurrentHpController do
   @behaviour GmBot.Controllers
   alias GmBot.Models.Character
   alias GmBot.Controllers.Helpers
@@ -10,12 +10,12 @@ defmodule GmBot.Controllers.What.MaxHpController do
 
     case Character.get(owner, character_name) do
       nil -> failure
-      character -> success(character.name, character.max_hp)
+      character -> success(character.name, character.current_hp)
     end
   end
 
   defp success(name, amount) do
-    "#{name}'s max hp is #{amount}"
+    "#{name}'s current hp is #{amount}"
   end
 
   defp failure do
@@ -23,10 +23,10 @@ defmodule GmBot.Controllers.What.MaxHpController do
   end
 
   def help, do: """
-  - `what is <character name> max hp` Displays the characters max hp
+  - `what is <character name> current hp` Displays the characters current hp
     Example: ```
-      <user> @gm_bot what is Drake Daverell III max hp
-      <gm_bot> Drake Daverell III's max hp is 54
+      <user> @gm_bot what is Drake Daverell III current hp
+      <gm_bot> Drake Daverell III's current hp is 54
     ```
   """
 end

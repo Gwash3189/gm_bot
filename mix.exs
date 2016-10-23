@@ -15,7 +15,15 @@ defmodule GmBot.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [applications: [:logger, :crypto, :ssl, :postgrex, :ecto, :httpoison],
-     mod: {GmBot, []}]
+     mod: mod]
+  end
+
+  defp mod do
+    if Mix.env == :test do
+      []
+    else
+      {GmBot, []}
+    end
   end
 
   defp deps do
@@ -23,7 +31,8 @@ defmodule GmBot.Mixfile do
       {:simpler_slack, "~> 0.0.5"},
       {:postgrex, ">= 0.0.0"},
       {:ecto, "~> 2.0.0"},
-      {:poison, "~> 2.0"}
+      {:poison, "~> 2.0"},
+      {:logger_file_backend, "~> 0.0.9"}
     ]
   end
 end

@@ -4,6 +4,10 @@ defmodule GmBot.Router do
       def route(_) do
         unquote(str)
       end
+
+      def default_route_contains?(_) do
+        unquote(str)
+      end
     end
   end
   defmacro route(opts) do
@@ -25,13 +29,18 @@ defmodule GmBot.Router do
     call = Keyword.get(opts, :call, :handle)
     quote do
       def route_contains?(%{text: text} = state) do
-        {_, module} = Enum.find(unquote(matches), fn({str, module}) ->
+        pair = Enum.find(unquote(matches), fn({str, module}) ->
           if String.contains?(text, str) do
             {str, module}
           end
         end)
 
-        apply(module, unquote(call), [state])
+        case pair do
+          {str, module} ->
+            apply(module, unquote(call), [state])
+          _ ->
+            __MODULE__.default_route_contains?(state)
+        end
       end
     end
   end
