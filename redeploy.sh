@@ -17,6 +17,10 @@ echo "migrating"
 echo "======================"
 MIX_ENV=prod mix ecto.migrate
 echo "======================"
+echo "updating version with `date`"
+echo "======================"
+date > .version
+echo "======================"
 echo "starting service again"
 echo "======================"
 MIX_ENV=prod elixir --detached -S mix run --no-halt
