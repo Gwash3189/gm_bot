@@ -17,6 +17,10 @@ echo "migrating"
 echo "======================"
 MIX_ENV=prod mix ecto.migrate
 echo "======================"
+echo "updating log with `date`"
+echo "======================"
+date > gm_log.log
+echo "======================"
 echo "starting service again"
 echo "======================"
 MIX_ENV=prod elixir --detached -S mix run --no-halt
