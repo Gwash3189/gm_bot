@@ -11,12 +11,18 @@ defmodule GmBot.Tests.Router do
     end
   end
 
+  defmodule OtherTestController do
+    def handle(_) do
+      "other test controller"
+    end
+  end
+
   defmodule TestRoute do
     import GmBot.Router
 
     route action: "test", dispatch_to: TestController
     route action: "custom", dispatch_to: TestController, call: :custom
-    contains? [{"this text", TestController}]
+    contains? [{"this text", TestController}, {"text", OtherTestController}]
 
     default "default"
   end
@@ -36,6 +42,12 @@ defmodule GmBot.Tests.Router do
   describe "when the route contains the text" do
     test "it routes to the controller" do
       assert TestRoute.route_contains?(%{text: "this text is awesome"}) == "handle"
+    end
+  end
+
+  describe "when there are multiple contains routes" do
+    test "it routes to the correct controller" do
+      assert TestRoute.route_contains?(%{text: "text"}) == "other test controller"
     end
   end
 
