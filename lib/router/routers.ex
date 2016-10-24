@@ -4,6 +4,7 @@ defmodule GmBot.Routers do
   import GmBot.Router
 
   route action: "register", dispatch_to: Controllers.RegisterController
+  route action: "version", dispatch_to: Controllers.VersionController
   route action: "hi", dispatch_to: Controllers.PingController
   route action: "hello", dispatch_to: Controllers.PingController
   route action: "help", dispatch_to: Controllers.HelpController
