@@ -21,9 +21,14 @@ defmodule GmBot.Models.Character do
       select: c
   end
 
-  def get(owner, name) do
-    query(owner, name)
+  def get(%{user: owner, name: name}) do
+    character = query(owner, name)
       |> GmBot.Repo.one
+
+    case character do
+      nil -> :no_character_found
+      character -> character
+    end
   end
 
   def update(owner, name, params) do

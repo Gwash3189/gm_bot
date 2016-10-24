@@ -1,6 +1,4 @@
 defmodule TestHelpers do
-  import Ecto.Query
-
   def start_db do
     children = [
       Supervisor.Spec.worker(GmBot.Repo, [])

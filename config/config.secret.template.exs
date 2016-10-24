@@ -1,6 +1,5 @@
 use Mix.Config
 
-
 config :gm_bot, GmBot.Repo,
   adapter: Ecto.Adapters.Postgres,
   database: "secret",

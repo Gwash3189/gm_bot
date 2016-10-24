@@ -1,26 +1,21 @@
 defmodule GmBot.Controllers.What.CurrentHpController do
   @behaviour GmBot.Controllers
   alias GmBot.Models.Character
-  alias GmBot.Controllers.Helpers
 
-  def handle(%{parts: parts, user: owner}) do
-    character_name = List.delete(parts, "is")
-      |> List.first
-      |> Helpers.remove_apostrophe
+  def handle(state), do:
+    Character.get(state)
+      |> result
 
-    case Character.get(owner, character_name) do
-      nil -> failure
-      character -> success(character.name, character.current_hp)
-    end
-  end
+  defp result(%Character{} = character), do:
+    success(character)
+  defp result(:no_character_found), do:
+    failure(:no_character_found)
 
-  defp success(name, amount) do
-    "#{name}'s current hp is #{amount}"
-  end
+  defp success(%Character{name: name, current_hp: current_hp}), do:
+    "#{name}'s current hp is #{current_hp}."
 
-  defp failure do
-    "Something went wrong!"
-  end
+  defp failure(:no_character_found), do:
+    "You don't have a character by that name. Try registering one."
 
   def help, do: """
   - `what is <character name> current hp` Displays the characters current hp

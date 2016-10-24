@@ -1,26 +1,21 @@
 defmodule GmBot.Controllers.What.MaxHpController do
   @behaviour GmBot.Controllers
   alias GmBot.Models.Character
-  alias GmBot.Controllers.Helpers
 
-  def handle(%{parts: parts, user: owner}) do
-    character_name = List.delete(parts, "is")
-      |> List.first
-      |> Helpers.remove_apostrophe
+  def handle(state), do:
+    Character.get(state)
+      |> result
 
-    case Character.get(owner, character_name) do
-      nil -> failure
-      character -> success(character.name, character.max_hp)
-    end
-  end
+  defp result(%Character{} = character), do:
+    success(character)
+  defp result(:no_character_found), do:
+    failure(:no_character_found)
 
-  defp success(name, amount) do
-    "#{name}'s max hp is #{amount}"
-  end
+  defp success(%Character{name: name, max_hp: max_hp}), do:
+    "#{name}'s max hp is #{max_hp}."
 
-  defp failure do
-    "Something went wrong!"
-  end
+  defp failure(:no_character_found), do:
+    "You don't have a character by that name. Try registering one."
 
   def help, do: """
   - `what is <character name> max hp` Displays the characters max hp
