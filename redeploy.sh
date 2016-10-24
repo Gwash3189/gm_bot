@@ -3,7 +3,7 @@ date
 echo "======================"
 echo "pulling"
 echo "======================"
-git pull origin master
+git fetch origin master && git reset --hard origin/master
 echo "======================"
 echo "cleaning and compiling"
 echo "======================"

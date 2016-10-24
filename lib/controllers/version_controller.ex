@@ -1,7 +1,7 @@
 defmodule GmBot.Controllers.VersionController do
   @behaviour GmBot.Controllers
 
-  def handle(%{parts: parts, user: owner}) do
+  def handle(_) do
     File.read("./.version")
   end
 
