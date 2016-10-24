@@ -11,6 +11,7 @@ defmodule GmBot.Controllers.HelpController do
     #{GmBot.Controllers.What.MaxHpController.help}
     #{GmBot.Controllers.Set.CurrentHpController.help}
     #{GmBot.Controllers.What.CurrentHpController.help}
+    #{GmBot.Controllers.What.VersionController.help}
     """
   end
 
