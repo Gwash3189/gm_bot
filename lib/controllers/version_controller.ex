@@ -2,7 +2,8 @@ defmodule GmBot.Controllers.VersionController do
   @behaviour GmBot.Controllers
 
   def handle(_) do
-    File.read("./.version")
+  {:ok, contents} = File.read("./.version")
+  contents
   end
 
   def help do
