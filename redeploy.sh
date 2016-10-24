@@ -19,7 +19,7 @@ MIX_ENV=prod mix ecto.migrate
 echo "======================"
 echo "updating version with `date`"
 echo "======================"
-date > .version
+echo "https://github.com/Gwash3189/gm_bot/commit/`git rev-parse HEAD`" > .version
 echo "======================"
 echo "starting service again"
 echo "======================"
