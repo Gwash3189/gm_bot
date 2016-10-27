@@ -10,12 +10,12 @@ defmodule GmBot.Tests.Controllers.Set.MaxHpController do
   def value, do: 30
   def text, do: "#{name}'s max hp to #{value}"
   def parts, do: String.split(text, " ")
-  def state, do: %{parts: parts, user: user}
+  def state, do: %{parts: parts, user: user, text: text}
 
   def invalid_value, do: "x"
   def invalid_text, do: "#{name}'s max hp to #{invalid_value}"
   def invalid_parts, do: String.split(invalid_text, " ")
-  def invalid_state, do: %{parts: invalid_parts, user: user}
+  def invalid_state, do: %{parts: invalid_parts, user: user, text: invalid_text}
 
   describe "when setting a characters max hp" do
     test "it returns a valid message" do

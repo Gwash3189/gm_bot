@@ -10,12 +10,12 @@ defmodule GmBot.Tests.Controllers.Set.CurrentHpController do
   def value, do: 30
   def text, do: "#{name}'s current hp to #{value}"
   def parts, do: String.split(text, " ")
-  def state, do: %{parts: parts, user: user}
+  def state, do: %{parts: parts, user: user, text: text}
 
   def invalid_value, do: "x"
   def invalid_text, do: "#{name}'s current hp to #{invalid_value}"
   def invalid_parts, do: String.split(invalid_text, " ")
-  def invalid_state, do: %{parts: invalid_parts, user: user}
+  def invalid_state, do: %{parts: invalid_parts, user: user, text: invalid_text}
 
   describe "when setting a characters current hp" do
     test "it returns a valid message" do
@@ -36,6 +36,7 @@ defmodule GmBot.Tests.Controllers.Set.CurrentHpController do
       %Character{name: name, owner: user}
         |> Character.changeset
         |> GmBot.Repo.insert
+
 
       message = GmBot.Controllers.Set.CurrentHpController.handle(invalid_state)
 
