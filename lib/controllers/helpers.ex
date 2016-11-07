@@ -32,8 +32,16 @@ defmodule GmBot.Controllers.Helpers do
   end
 
   def get_character_name(%{parts: parts}) do
-    List.first(parts)
-      |> remove_apostrophe
+    case Enum.member?(parts, "is") do
+      true ->
+        List.delete_at(parts, 0)
+          |> List.first
+          |> remove_apostrophe
+      false ->
+        List.first(parts)
+        |> remove_apostrophe
+    end
+
   end
 
   def get_stat_value(%{parts: parts} = state) do

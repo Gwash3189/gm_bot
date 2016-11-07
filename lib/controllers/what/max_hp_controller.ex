@@ -2,9 +2,12 @@ defmodule GmBot.Controllers.What.MaxHpController do
   @behaviour GmBot.Controllers
   alias GmBot.Models.Character
 
-  def handle(state), do:
-    Character.get(state)
+  def handle(state) do
+    name = GmBot.Controllers.Helpers.get_character_name(state)
+    Map.put(state, :name, name)
+      |> Character.get
       |> result
+  end
 
   defp result(%Character{} = character), do:
     success(character)
