@@ -8,8 +8,13 @@ defmodule GmBot.Controllers.Set.StatsController do
       @behaviour GmBot.Controllers
       alias GmBot.Controllers.Helpers
       alias GmBot.Models.Character
+      require Logger
 
       def handle(state) do
+        Logger.debug("Inspecting a stat change >>>>")
+        Logger.debug(state.parts)
+        Logger.debug(state.user)
+        Logger.debug(state.text)
         name = Helpers.get_character_name(state)
         stat_value = Helpers.get_stat_value(state)
 
