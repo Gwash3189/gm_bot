@@ -25,9 +25,7 @@ defmodule GmBot.Controllers.Set.StatsController do
       end
 
       defp handle_stat_change(name, safe_int_tuple, %{user: owner} = state) do
-        Logger.debug("modifier value")
         modifier = Helpers.get_modifier(state)
-        Logger.debug(modifier)
         character = Map.put(%{}, unquote(stat_atom), elem(safe_int_tuple, 1))
 
         case modifier do
@@ -37,7 +35,9 @@ defmodule GmBot.Controllers.Set.StatsController do
             Character.update(owner, name, character)
               |> result
           {:error, :no_modifier} ->
-              Character.update(owner, name, character)
+            modifier_map = Map.put(%{}, unquote(modifier_atom), 0)
+            character = Map.merge(character, modifier_map)
+            Character.update(owner, name, character)
               |> result
           {:error, :non_safe_int} -> result(modifier)
         end
