@@ -25,7 +25,9 @@ defmodule GmBot.Controllers.Set.StatsController do
       end
 
       defp handle_stat_change(name, safe_int_tuple, %{user: owner} = state) do
+        Logger.debug("modifier value")
         modifier = Helpers.get_modifier(state)
+        Logger.debug(modifier)
         character = Map.put(%{}, unquote(stat_atom), elem(safe_int_tuple, 1))
 
         case modifier do
