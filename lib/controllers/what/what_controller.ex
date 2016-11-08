@@ -1,7 +1,9 @@
 defmodule GmBot.Controllers.What.WhatController do
-  defmacro retrieve(stat_atom) do
-    stat_full_name = Atom.to_string(stat_atom)
-      |> String.replace("_", " ")
+  defmacro retrieve(options) do
+    atoms_to_retrieve = Keyword.get(options, :stats, [])
+    success_callback = Keyword.get(options, :success)
+    failure_callback = Keyword.get(options, :failure)
+    help_callback = Keyword.get(options, :help)
 
     quote do
       @behaviour GmBot.Controllers
@@ -20,21 +22,18 @@ defmodule GmBot.Controllers.What.WhatController do
         failure(:no_character_found)
 
       defp success(char) do
-        stat = Map.get(char, unquote(stat_atom))
-        name = Map.get(char, :name)
-        "#{name}'s #{unquote(stat_full_name)} is #{stat}."
+        stats = Enum.reduce(unquote(atoms_to_retrieve), %{}, fn(stat_atom, acc) ->
+          stat_value = Map.get(char, stat_atom)
+          Map.put(acc, stat_atom, stat_value)
+        end)
+        stats = Map.merge(stats, %{name: Map.get(char, :name)})
+        unquote(success_callback).(stats)
       end
 
       defp failure(:no_character_found), do:
-        "You don't have a character by that name. Try registering one."
+        unquote(failure_callback).()
 
-      def help, do: """
-      - `what is <character name> #{unquote(stat_full_name)}` Displays the characters #{unquote(stat_full_name)}
-        Example: ```
-          <user> @gm_bot what is Drake Daverell III #{unquote(stat_full_name)}
-          <gm_bot> Drake Daverell III's #{unquote(stat_full_name)} is 54
-        ```
-      """
+      def help, do: unquote(help_callback).()
     end
   end
 end
