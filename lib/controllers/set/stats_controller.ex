@@ -44,12 +44,12 @@ defmodule GmBot.Controllers.Set.StatsController do
       defp result({:error, error}), do:
         failure({:error, error})
 
-      defp success(name, stat, nil), do:
-        "#{name}'s strength has been set to #{stat}"
+      defp success(name, stat, 0), do:
+        "#{name}'s #{unquote(stat_string)} has been set to #{stat}"
       defp success(name, stat, modifier) do
         case modifier > -1 do
-          true -> "#{name}'s strength has been set to #{stat} (+#{modifier})"
-          false -> "#{name}'s strength has been set to #{stat} (-#{modifier})"
+          true -> "#{name}'s #{unquote(stat_string)} has been set to #{stat} (+#{modifier})"
+          false -> "#{name}'s #{unquote(stat_string)} has been set to #{stat} (-#{modifier})"
         end
       end
       defp failure({:error, :non_safe_int}), do:

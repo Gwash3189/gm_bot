@@ -28,7 +28,7 @@ defmodule GmBot.Mixfile do
 
   defp deps do
     [
-      {:simpler_slack, "~> 0.0.5"},
+      {:simpler_slack, "~> 0.0.6"},
       {:postgrex, ">= 0.0.0"},
       {:ecto, "~> 2.0.0"},
       {:poison, "~> 2.0"},
